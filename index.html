@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Himanshu Gupta | Software Engineer</title>
+  <meta name="description" content="Portfolio of Himanshu Gupta – Full-Stack Developer skilled in React.js, Node.js, and Modern Web Architecture."/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="dark-theme">
+
+  <!-- ===== BACKGROUND NOISE & GRID ===== -->
+  <div class="bg-noise"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ===== CANVAS (THREE.JS) ===== -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ===== LOADER ===== -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-bar"></div>
+      <div class="loader-status">
+        <span class="status-code">INITIALIZING_SYSTEM</span>
+        <span class="status-perc">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div id="cursor-glow">
+    <div class="cb tl"></div>
+    <div class="cb tr"></div>
+    <div class="cb bl"></div>
+    <div class="cb br"></div>
+  </div>
+
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div id="splash-wrapper">
+    <canvas id="splash-canvas"></canvas>
+    <div class="splash-content">
+      <div class="splash-top">
+        <span class="mono text-xs">PORTFOLIO // INITIATION</span>
+      </div>
+      <div class="splash-center">
+        <div class="fade-in-up" style="background: rgba(148, 163, 184,0.05); padding: 8px 16px; border-radius: 4px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(148, 163, 184,0.3); margin-bottom: 2rem;">
+          <div class="pulse-dot"></div>
+          <span class="mono text-xs" style="color: var(--accent-primary); letter-spacing: 0.15em;">SYS.BOOT // OK</span>
+        </div>
+        
+        <h1 class="splash-title">
+          <span class="splash-line fade-in-up delay-1" style="font-weight: 300;">HIMANSHU</span>
+          <span class="splash-line fade-in-up delay-2" style="font-weight: 700; color: var(--accent-primary);">GUPTA</span>
+        </h1>
+        
+        <div class="fade-in-up delay-3" style="margin-top: 3rem; background: rgba(0,0,0,0.4); border-left: 2px solid var(--accent-primary); padding: 1rem 1.5rem; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #888; letter-spacing: 0.1em; width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 0 20px rgba(148, 163, 184,0.05); backdrop-filter: blur(4px);">
+          <div><span style="color: var(--accent-primary); margin-right: 8px;">></span> ROLE_ASSIGNED: <span style="color: #fff;">[FULL_STACK_ENGINEER]</span></div>
+          <div><span style="color: var(--accent-primary); margin-right: 8px;">></span> CORE_PROTOCOLS: <span style="color: #fff;">[REACT, NODE.JS, NEXT.JS]</span></div>
+          <div><span style="color: var(--accent-primary); margin-right: 8px;">></span> SYS_STATUS: <span style="color: var(--accent-primary); text-shadow: 0 0 5px rgba(148, 163, 184,0.5);">ONLINE_AND_SECURE</span></div>
+        </div>
+      </div>
+      <div class="splash-bottom fade-in-up delay-4">
+        <button id="splash-enter-btn" class="splash-btn">CLICK ANYWHERE TO INITIALIZE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT WRAPPER ===== -->
+  <div id="content-wrapper">
+    <!-- ===== HUD OVERLAY ===== -->
+    <div id="hud-container">
+      <div class="hud-top">
+        <a href="#hero" class="hud-link">[ 00 / HOME ]</a>
+        <span class="hud-sep">< 1 ></span>
+        <a href="#about-me" class="hud-link">[ 01 / ABOUT ]</a>
+        <span class="hud-sep">< 2 ></span>
+        <a href="#skills" class="hud-link">[ 02 / EXPERTISE ]</a>
+        <span class="hud-sep">< 3 ></span>
+        <a href="#deployments" class="hud-link">[ 03 / PROJECTS ]</a>
+        <span class="hud-sep">< 4 ></span>
+        <a href="#experience" class="hud-link">[ 04 / BACKGROUND ]</a>
+        <span class="hud-sep">< 5 ></span>
+        <a href="#contact" class="hud-link">[ 05 / CONTACT ]</a>
+      </div>
+      <div class="hud-bottom">
+        <span>ENERGY ASSISTANT AI</span>
+        <span class="hud-sep">< 3 ></span>
+        <span>GEMINI INTEGRATION</span>
+        <span class="hud-sep">< 4 ></span>
+        <span>SYSTEM ARCHITECTURE</span>
+      </div>
+      <div class="hud-left">
+        <span>FULL-STACK < 1 > ENGINEERING</span>
+        <span class="hud-sep"></span>
+        <span>FRONT & BACK-END DEV</span>
+      </div>
+      <div class="hud-right">
+        <span>SOFTWARE ENGINEER</span>
+        <span class="hud-sep">< 2 ></span>
+        <span>FULL-STACK DEV</span>
+      </div>
+    </div>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="section hero-section">
+      <div class="hero-content">
+        <div class="sys-badge reveal-elem">
+          <div class="pulse-dot"></div>
+          <span>SYSTEM.ONLINE</span>
+        </div>
+        
+        <h1 class="hero-title reveal-elem">
+          <span style="font-weight: 300;">Himanshu</span>
+          <br/>
+          <span style="font-weight: 700; color: var(--accent-primary);">Gupta</span>
+        </h1>
+        
+        <div class="hero-role reveal-elem">
+          <span class="bracket">[</span>
+          <span id="typewriter"></span><span class="cursor-blink">_</span>
+          <span class="bracket">]</span>
+        </div>
+        
+        <p class="hero-desc reveal-elem">
+          Architecting scalable systems and immersive digital experiences. 
+          Specializing in React, Node.js, and high-performance applications.
+        </p>
+        
+        <div class="hero-cta reveal-elem" style="gap: 20px;">
+          <a href="#deployments" class="btn btn-primary" style="font-size: 0.95rem; padding: 14px 32px; border-radius: 0; text-transform: none; letter-spacing: 0; font-family: var(--font-sans); font-weight: 500; white-space: nowrap;">
+            View Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="margin-left: 8px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-outline" style="font-size: 0.95rem; padding: 14px 32px; border-radius: 0; text-transform: none; letter-spacing: 0; font-family: var(--font-sans); white-space: nowrap;">
+            Get in touch
+          </a>
+          <a href="resume.pdf" download="Himanshu_Gupta_Resume.pdf" class="btn btn-outline" style="font-size: 0.95rem; padding: 14px 32px; border-radius: 0; text-transform: none; letter-spacing: 0; font-family: var(--font-sans); border-color: rgba(255,255,255,0.15); color: #fff; background: rgba(255,255,255,0.03); white-space: nowrap;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right: 8px; display: inline-block; vertical-align: middle; position: relative; top: -1px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Resume
+          </a>
+        </div>
+      </div>
+      
+      <!-- 3D Core Container -->
+      <div id="hero-3d-wrapper" class="reveal-elem delay-2"></div>
+      
+      <div class="scroll-indicator">
+        <span class="mono text-xs">SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ME ===== -->
+    <section id="about-me" class="section" style="min-height: auto; padding-bottom: 60px;">
+      <div class="section-header reveal-elem" style="margin-bottom: 30px;">
+        <div class="mono-tag">01 // IDENTITY</div>
+        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+      </div>
+      <div class="bento-card reveal-elem bento-hover" style="padding: 0; overflow: hidden; border: 1px solid rgba(148, 163, 184,0.15); box-shadow: 0 0 40px rgba(148, 163, 184,0.05); background: #0a0a0a;">
+        <!-- Top Tech Bar -->
+        <div style="background: rgba(148, 163, 184,0.05); border-bottom: 1px solid rgba(148, 163, 184,0.1); padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;">
+          <span class="mono text-xs" style="color: var(--accent-primary); display: flex; align-items: center; gap: 8px;">
+            <div class="pulse-dot" style="position: static; transform: none; box-shadow: 0 0 10px rgba(148, 163, 184,0.8);"></div> 
+            USER_PROFILE_ACCESSED
+          </span>
+          <span class="mono text-xs text-dim" style="letter-spacing: 0.1em;">ID: HG-9924</span>
+        </div>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 40px; padding: 40px;">
+          <!-- Left: Avatar & Quick Stats -->
+          <div style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Tech Image Frame -->
+            <div style="width: 200px; height: 200px; position: relative; border: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.5); padding: 6px;">
+              <div style="position: absolute; top: -1px; left: -1px; width: 12px; height: 12px; border-top: 2px solid var(--accent-primary); border-left: 2px solid var(--accent-primary);"></div>
+              <div style="position: absolute; top: -1px; right: -1px; width: 12px; height: 12px; border-top: 2px solid var(--accent-primary); border-right: 2px solid var(--accent-primary);"></div>
+              <div style="position: absolute; bottom: -1px; left: -1px; width: 12px; height: 12px; border-bottom: 2px solid var(--accent-primary); border-left: 2px solid var(--accent-primary);"></div>
+              <div style="position: absolute; bottom: -1px; right: -1px; width: 12px; height: 12px; border-bottom: 2px solid var(--accent-primary); border-right: 2px solid var(--accent-primary);"></div>
+              
+              <img src="WhatsApp Image 2026-03-23 at 8.58.29 PM.jpeg" alt="Himanshu Gupta" style="width: 100%; height: 100%; object-fit: cover; object-position: center 15%;">
+            </div>
+            
+            <!-- Terminal Stats -->
+            <div class="mono text-xs" style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px; letter-spacing: 0.05em;">
+              <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-dim);">LOC:</span> <span style="color: #fff;">INDIA</span></div>
+              <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-dim);">ROLE:</span> <span style="color: #fff;">FULL-STACK</span></div>
+              <div style="display: flex; justify-content: space-between;"><span style="color: var(--text-dim);">SYS_STATUS:</span> <span style="color: var(--accent-primary); text-shadow: 0 0 8px rgba(148, 163, 184,0.4);">ONLINE</span></div>
+            </div>
+          </div>
+          
+          <!-- Right: Bio Data -->
+          <div style="flex: 1 1 300px; display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="font-size: 2.2rem; margin-bottom: 8px; font-weight: 700; letter-spacing: -0.02em;">Himanshu <span class="gradient-text">Gupta</span></h3>
+            <div class="mono text-xs" style="color: var(--accent-primary); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+              <span>> EXECUTING BIOGRAPHY_LOG.EXE ...</span>
+              <span style="background: rgba(148, 163, 184,0.1); padding: 4px 8px; border-radius: 4px; box-shadow: 0 0 10px rgba(148, 163, 184,0.2); letter-spacing: 0.05em;">[ STATUS: OPEN_TO_WORK ]</span>
+            </div>
+            
+            <p class="text-dim" style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 16px;">
+              I am a passionate Full-Stack Software Engineer with a deep interest in modern web architecture, scalable systems, and sleek UI/UX design. My journey in coding is driven by the desire to solve complex problems and build applications that leave a lasting impact.
+            </p>
+            <p class="text-dim" style="font-size: 1.15rem; line-height: 1.8;">
+              Whether it's fine-tuning a backend API, optimizing a database schema, or crafting a pixel-perfect frontend, <span style="color: #fff; font-weight: 500;">I thrive on engineering excellence.</span>
+            </p>
+            
+            <!-- Action Badges -->
+            <div style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px;">
+              <span class="tech-badge mono text-xs" style="border-color: rgba(148, 163, 184,0.3); color: var(--accent-primary); background: rgba(148, 163, 184,0.05); padding: 6px 12px; letter-spacing: 0.1em;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="12" height="12" style="display:inline; margin-right:6px; margin-top:-2px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>ARCHITECT
+              </span>
+              <span class="tech-badge mono text-xs" style="padding: 6px 12px; letter-spacing: 0.1em;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="12" height="12" style="display:inline; margin-right:6px; margin-top:-2px;"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>DEVELOP
+              </span>
+              <span class="tech-badge mono text-xs" style="padding: 6px 12px; letter-spacing: 0.1em;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="12" height="12" style="display:inline; margin-right:6px; margin-top:-2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>DEPLOY
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS (BENTO BOX) ===== -->
+    <section id="skills" class="section" style="padding-top: 60px;">
+      <div class="section-header reveal-elem">
+        <div class="mono-tag">02 // EXPERTISE</div>
+        <h2 class="section-title">Skills &amp; <span class="gradient-text">Technologies</span></h2>
+      </div>
+
+      <div class="bento-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        
+        <!-- CORE LANGUAGES -->
+        <div class="bento-card reveal-elem bento-hover" style="border: 1px solid rgba(148, 163, 184,0.15); background: #0a0a0a; padding: 32px;">
+          <div style="border-bottom: 1px solid rgba(148, 163, 184,0.1); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <span class="mono text-sm" style="color: var(--accent-primary); letter-spacing: 0.05em;"><span style="opacity: 0.5;">></span> SYS.LANGUAGES</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" width="18" height="18" style="opacity: 0.5;"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="skill-row">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="mono text-sm" style="color: #fff;">C++ / JAVA</span>
+                <span class="mono text-sm text-dim">95%</span>
+              </div>
+              <div style="height: 6px; background: rgba(255,255,255,0.05); width: 100%; position: relative; overflow: hidden;"><div style="position: absolute; top:0; left:0; height: 100%; background: var(--accent-primary); width: 95%; box-shadow: 0 0 10px var(--accent-primary);"></div></div>
+            </div>
+            
+            <div class="skill-row">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="mono text-sm" style="color: #fff;">JAVASCRIPT</span>
+                <span class="mono text-sm text-dim">90%</span>
+              </div>
+              <div style="height: 6px; background: rgba(255,255,255,0.05); width: 100%; position: relative; overflow: hidden;"><div style="position: absolute; top:0; left:0; height: 100%; background: var(--accent-primary); width: 90%; box-shadow: 0 0 10px var(--accent-primary);"></div></div>
+            </div>
+
+            <div class="skill-row">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="mono text-sm" style="color: #fff;">PYTHON / PHP</span>
+                <span class="mono text-sm text-dim">80%</span>
+              </div>
+              <div style="height: 6px; background: rgba(255,255,255,0.05); width: 100%; position: relative; overflow: hidden;"><div style="position: absolute; top:0; left:0; height: 100%; background: var(--accent-primary); width: 80%; box-shadow: 0 0 10px var(--accent-primary);"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRAMEWORKS -->
+        <div class="bento-card reveal-elem bento-hover" style="border: 1px solid rgba(148, 163, 184,0.15); background: #0a0a0a; padding: 32px;">
+          <div style="border-bottom: 1px solid rgba(148, 163, 184,0.1); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <span class="mono text-sm" style="color: var(--accent-primary); letter-spacing: 0.05em;"><span style="opacity: 0.5;">></span> SYS.FRAMEWORKS</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" width="18" height="18" style="opacity: 0.5;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="skill-row">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="mono text-sm" style="color: #fff;">REACT.JS / NEXT.JS</span>
+                <span class="mono text-sm text-dim">90%</span>
+              </div>
+              <div style="height: 6px; background: rgba(255,255,255,0.05); width: 100%; position: relative; overflow: hidden;"><div style="position: absolute; top:0; left:0; height: 100%; background: var(--accent-primary); width: 90%; box-shadow: 0 0 10px var(--accent-primary);"></div></div>
+            </div>
+            
+            <div class="skill-row">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="mono text-sm" style="color: #fff;">NODE.JS / EXPRESS</span>
+                <span class="mono text-sm text-dim">85%</span>
+              </div>
+              <div style="height: 6px; background: rgba(255,255,255,0.05); width: 100%; position: relative; overflow: hidden;"><div style="position: absolute; top:0; left:0; height: 100%; background: var(--accent-primary); width: 85%; box-shadow: 0 0 10px var(--accent-primary);"></div></div>
+            </div>
+
+            <div class="skill-row">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="mono text-sm" style="color: #fff;">TAILWIND CSS</span>
+                <span class="mono text-sm text-dim">95%</span>
+              </div>
+              <div style="height: 6px; background: rgba(255,255,255,0.05); width: 100%; position: relative; overflow: hidden;"><div style="position: absolute; top:0; left:0; height: 100%; background: var(--accent-primary); width: 95%; box-shadow: 0 0 10px var(--accent-primary);"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DATABASES -->
+        <div class="bento-card reveal-elem bento-hover" style="border: 1px solid rgba(148, 163, 184,0.15); background: #0a0a0a; padding: 32px;">
+          <div style="border-bottom: 1px solid rgba(148, 163, 184,0.1); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <span class="mono text-sm" style="color: var(--accent-primary); letter-spacing: 0.05em;"><span style="opacity: 0.5;">></span> SYS.DATABASES</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" width="18" height="18" style="opacity: 0.5;"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="border: 1px solid rgba(255,255,255,0.05); border-left: 2px solid var(--accent-primary); padding: 16px; background: linear-gradient(90deg, rgba(148, 163, 184,0.03), transparent); display: flex; justify-content: space-between; align-items: center;">
+              <span class="mono text-sm" style="color: #fff; font-weight: 700;">MONGODB</span>
+              <div class="mono text-xs" style="color: var(--accent-primary);">NOSQL</div>
+            </div>
+            <div style="border: 1px solid rgba(255,255,255,0.05); border-left: 2px solid var(--accent-secondary); padding: 16px; background: linear-gradient(90deg, rgba(148, 163, 184,0.03), transparent); display: flex; justify-content: space-between; align-items: center;">
+              <span class="mono text-sm" style="color: #fff; font-weight: 700;">POSTGRESQL</span>
+              <div class="mono text-xs" style="color: var(--accent-secondary);">RDBMS</div>
+            </div>
+            <div style="border: 1px solid rgba(255,255,255,0.05); border-left: 2px solid rgba(255,255,255,0.3); padding: 16px; background: rgba(255,255,255,0.01); display: flex; justify-content: space-between; align-items: center;">
+              <span class="mono text-sm" style="color: #fff; font-weight: 700;">MYSQL</span>
+              <div class="mono text-xs text-dim">RDBMS</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEVOPS & TOOLS -->
+        <div class="bento-card reveal-elem bento-hover" style="border: 1px solid rgba(148, 163, 184,0.15); background: #0a0a0a; padding: 32px;">
+          <div style="border-bottom: 1px solid rgba(148, 163, 184,0.1); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <span class="mono text-sm" style="color: var(--accent-primary); letter-spacing: 0.05em;"><span style="opacity: 0.5;">></span> SYS.TOOLS</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" width="18" height="18" style="opacity: 0.5;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;">
+            <span class="tech-badge mono text-sm" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); padding: 10px 16px; color: #fff;"><span style="color: var(--accent-primary); margin-right: 8px;">></span>GIT</span>
+            <span class="tech-badge mono text-sm" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); padding: 10px 16px; color: #fff;"><span style="color: var(--accent-primary); margin-right: 8px;">></span>GITHUB</span>
+            <span class="tech-badge mono text-sm" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); padding: 10px 16px; color: #fff;"><span style="color: var(--accent-primary); margin-right: 8px;">></span>POSTMAN</span>
+            <span class="tech-badge mono text-sm" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); padding: 10px 16px; color: #fff;"><span style="color: var(--accent-primary); margin-right: 8px;">></span>FIGMA</span>
+            <span class="tech-badge mono text-sm" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); padding: 10px 16px; color: #fff;"><span style="color: var(--accent-primary); margin-right: 8px;">></span>XAMPP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS ROW -->
+      <div class="stats-grid mt-6">
+        <!-- LEETCODE -->
+        <a href="https://leetcode.com/u/himansshh07/" target="_blank" class="bento-card reveal-elem bento-hover flex-col-center stats-bento p-8" style="text-decoration:none; color:inherit; display:flex;">
+          <div class="stat-circle mb-4">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+              <circle class="ring-fg" cx="60" cy="60" r="54"></circle>
+            </svg>
+            <div class="stat-inner">
+              <span class="stat-num" data-target="100">0</span><span class="accent-text">+</span>
+            </div>
+          </div>
+          <span class="mono text-xs font-bold tracking-widest text-dim text-center">LEETCODE_SOLVED</span>
+        </a>
+        
+        <!-- GFG -->
+        <a href="https://www.geeksforgeeks.org/profile/hg333clte" target="_blank" class="bento-card reveal-elem bento-hover flex-col-center stats-bento p-8 delay-1" style="text-decoration:none; color:inherit; display:flex;">
+          <div class="stat-circle mb-4">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+              <circle class="ring-fg" cx="60" cy="60" r="54"></circle>
+            </svg>
+            <div class="stat-inner">
+              <span class="stat-num" data-target="100">0</span><span class="accent-text">+</span>
+            </div>
+          </div>
+          <span class="mono text-xs font-bold tracking-widest text-dim text-center">GFG_SOLVED</span>
+        </a>
+
+        <!-- GITHUB -->
+        <a href="https://github.com/himansh077" target="_blank" class="bento-card reveal-elem bento-hover flex-col-center stats-bento p-8 delay-2" style="text-decoration:none; color:inherit; display:flex;">
+          <div class="stat-circle mb-4">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+              <circle class="ring-fg" cx="60" cy="60" r="54"></circle>
+            </svg>
+            <div class="stat-inner">
+              <span class="stat-num" data-target="250">0</span><span class="accent-text">+</span>
+            </div>
+          </div>
+          <span class="mono text-xs font-bold tracking-widest text-dim text-center">GITHUB_COMMITS</span>
+        </a>
+
+        <!-- HACKATHONS -->
+        <div class="bento-card reveal-elem bento-hover flex-col-center stats-bento p-8 delay-3">
+          <div class="stat-circle mb-4">
+            <svg class="progress-ring" width="120" height="120">
+              <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+              <circle class="ring-fg" cx="60" cy="60" r="54"></circle>
+            </svg>
+            <div class="stat-inner">
+              <span class="stat-num" data-target="5">0</span><span class="accent-text">+</span>
+            </div>
+          </div>
+          <span class="mono text-xs font-bold tracking-widest text-dim text-center">HACKATHONS_&_CP</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         02 // PROJECTS (WIDESCREEN FORMAT)
+         ========================================= -->
+    <section id="deployments" class="section">
+      <div class="section-header reveal-elem">
+        <div class="mono-tag">03 // DEPLOYMENTS</div>
+        <h2 class="section-title">Projects &amp; <span class="gradient-text">Builds</span></h2>
+      </div>
+
+      <div class="projects-list">
+        <!-- PROJECT 1 -->
+        <div class="project-widescreen bento-card bento-hover reveal-elem" style="transform-style: preserve-3d;">
+          <div class="pw-terminal-header">
+            <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+            <span class="pw-path mono text-xs">~/deployments/volunteer-connect.exe</span>
+          </div>
+          <div class="pw-body">
+            <div class="pw-info" style="transform: translateZ(30px);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span class="mono-tag text-xs m-0">STATUS: ONLINE</span>
+                <span class="mono text-xs text-dim">[DEC 2025]</span>
+              </div>
+              <h3 class="pw-title"><a href="https://volunteer-connect-six.vercel.app/" target="_blank" style="text-decoration:none; color:inherit; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-primary)'" onmouseout="this.style.color='inherit'">Volunteer Connect</a> <span class="blinking-cursor">_</span></h3>
+              <p class="text-dim mt-4 mb-6 pw-desc">
+                >} INITIALIZING PLATFORM...<br>
+                Full-stack web platform connecting volunteers with NGOs. Enables seamless registration and participation through a secure, scalable UI.
+              </p>
+              <div class="tech-stack">
+                <span class="tech-badge">React.js</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">MongoDB</span>
+                <span class="tech-badge">Socket.io</span>
+              </div>
+              <div style="margin-top: 30px; display: flex; gap: 16px;">
+                <a href="https://volunteer-connect-six.vercel.app/" target="_blank" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Live Preview</a>
+                <a href="https://github.com/himansh077/VolunteerConnect" target="_blank" class="btn btn-outline" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="16" height="16"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> Source Code</a>
+              </div>
+            </div>
+            <div class="pw-visual bg-vc" style="transform: translateZ(20px); position: relative;">
+              <img src="volunteer.png" alt="Volunteer Connect" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/94a3b8/png?text=Volunteer+Screenshot'" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.75;">
+              <div class="visual-overlay noise-overlay" style="z-index: 1;"></div>
+              <div class="visual-overlay scanline" style="z-index: 1;"></div>
+              <div class="visual-data mono text-xs" style="z-index: 2;">
+                DATA_STREAM: [OX-1A2B]<br>CONNECTION_SECURED
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-widescreen bento-card bento-hover reveal-elem" style="transform-style: preserve-3d;">
+          <div class="pw-terminal-header">
+            <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+            <span class="pw-path mono text-xs">~/deployments/horticulture-connect.exe</span>
+          </div>
+          <div class="pw-body layout-reverse">
+            <div class="pw-info" style="transform: translateZ(30px);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span class="mono-tag text-xs m-0" style="border-color: rgba(148, 163, 184,0.3); color: var(--accent-secondary); background: rgba(148, 163, 184,0.05);">STATUS: DEPLOYED</span>
+                <span class="mono text-xs text-dim">[AUG 2024]</span>
+              </div>
+              <h3 class="pw-title"><a href="#" target="_blank" style="text-decoration:none; color:inherit; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-primary)'" onmouseout="this.style.color='inherit'">Horticulture Connect</a> <span class="blinking-cursor">_</span></h3>
+              <p class="text-dim mt-4 mb-6 pw-desc">
+                >} EXECUTING B2B_MODULE...<br>
+                Comprehensive e-commerce platform addressing middleman issues for farmers. Enables direct sales and implements B2B order routing.
+              </p>
+              <div class="tech-stack">
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">MySQL</span>
+                <span class="tech-badge">Tailwind CSS</span>
+              </div>
+              <div style="margin-top: 30px; display: flex; gap: 16px;">
+                <a href="#" target="_blank" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Live Preview</a>
+                <a href="https://github.com/himansh077/horti-culture" target="_blank" class="btn btn-outline" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="16" height="16"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> Source Code</a>
+              </div>
+            </div>
+            <div class="pw-visual bg-hc" style="transform: translateZ(20px); position: relative;">
+              <img src="horticulture.png" alt="Horticulture Connect" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/94a3b8/png?text=Horticulture+Screenshot'" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.75;">
+              <div class="visual-overlay grid-overlay" style="z-index: 1;"></div>
+              <div class="visual-overlay scanline" style="z-index: 1;"></div>
+              <div class="visual-data mono text-xs" style="z-index: 2;">
+                SYS_LOAD: 34%<br>B2B_ROUTER: ACTIVE
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-widescreen bento-card bento-hover reveal-elem" style="transform-style: preserve-3d;">
+          <div class="pw-terminal-header">
+            <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+            <span class="pw-path mono text-xs">~/deployments/energy-consumption-bot.exe</span>
+          </div>
+          <div class="pw-body">
+            <div class="pw-info" style="transform: translateZ(30px);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span class="mono-tag text-xs m-0" style="border-color: rgba(148, 163, 184,0.3); color: var(--accent-primary); background: rgba(148, 163, 184,0.05);">STATUS: TRAINING</span>
+                <span class="mono text-xs text-dim">[APR 2024]</span>
+              </div>
+              <h3 class="pw-title"><a href="https://himansh077.github.io/Energy-Consumption-Assistant/" target="_blank" style="text-decoration:none; color:inherit; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-primary)'" onmouseout="this.style.color='inherit'">Energy Consumption Bot</a> <span class="blinking-cursor">_</span></h3>
+              <p class="text-dim mt-4 mb-6 pw-desc">
+                >} LOADING GEMINI_MODEL...<br>
+                AI-driven platform optimizing home energy usage. Provides tailored tips and limits based on user input, leveraging the Gemini API.
+              </p>
+              <div class="tech-stack">
+                <span class="tech-badge">HTML/CSS/JS</span>
+                <span class="tech-badge">Gemini API</span>
+                <span class="tech-badge">Firebase</span>
+              </div>
+              <div style="margin-top: 30px; display: flex; gap: 16px;">
+                <a href="https://himansh077.github.io/Energy-Consumption-Assistant/" target="_blank" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Live Preview</a>
+                <a href="https://github.com/himansh077/Energy-Consumption-Assistant" target="_blank" class="btn btn-outline" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="16" height="16"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> Source Code</a>
+              </div>
+            </div>
+            <div class="pw-visual bg-energy" style="transform: translateZ(20px); position: relative;">
+              <img src="energy.png" alt="Energy Consumption Bot" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/94a3b8/png?text=Energy+Bot+Screenshot'" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.75;">
+              <div class="visual-overlay hex-overlay" style="z-index: 1;"></div>
+              <div class="visual-overlay scanline" style="z-index: 1;"></div>
+              <div class="visual-data mono text-xs" style="color:var(--accent-primary); z-index: 2;">
+                AI_MODEL: GEMINI-PRO<br>LATENCY: 42ms
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="project-widescreen bento-card bento-hover reveal-elem" style="transform-style: preserve-3d;">
+          <div class="pw-terminal-header">
+            <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+            <span class="pw-path mono text-xs">~/deployments/vibe-sphere.exe</span>
+          </div>
+          <div class="pw-body layout-reverse">
+            <div class="pw-info" style="transform: translateZ(30px);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span class="mono-tag text-xs m-0" style="border-color: rgba(148, 163, 184,0.3); color: var(--accent-primary); background: rgba(148, 163, 184,0.05);">STATUS: ONLINE</span>
+                <span class="mono text-xs text-dim">[NEW]</span>
+              </div>
+              <h3 class="pw-title"><a href="#" target="_blank" style="text-decoration:none; color:inherit; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-primary)'" onmouseout="this.style.color='inherit'" id="vibe-sphere-link">Vibe-Sphere</a> <span class="blinking-cursor">_</span></h3>
+              <p class="text-dim mt-4 mb-6 pw-desc">
+                >} EXECUTING EVENT_MANAGER...<br>
+                A comprehensive event management platform handling movie ticket bookings and large-scale event scheduling with seamless reservations.
+              </p>
+              <div class="tech-stack">
+                <span class="tech-badge">React.js</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">Express</span>
+                <span class="tech-badge">MongoDB</span>
+              </div>
+              <div style="margin-top: 30px; display: flex; gap: 16px;">
+                <a href="#" target="_blank" class="btn btn-primary" id="vibe-sphere-preview" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Live Preview</a>
+                <a href="https://github.com/himansh077/int-220-219" target="_blank" class="btn btn-outline" id="vibe-sphere-repo" style="padding: 10px 20px; font-size: 0.75rem; letter-spacing: 0.05em;"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" width="16" height="16"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> Source Code</a>
+              </div>
+            </div>
+            <div class="pw-visual bg-hc" style="transform: translateZ(20px); position: relative;">
+              <img src="vibe-sphere.png" alt="Vibe-Sphere Screenshot" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/94a3b8/png?text=Vibe-Sphere+Screenshot'" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.75;">
+              <div class="visual-overlay grid-overlay" style="z-index: 1;"></div>
+              <div class="visual-overlay scanline" style="z-index: 1;"></div>
+              <div class="visual-data mono text-xs" style="z-index: 2;">
+                TICKETING_ENGINE: READY<br>BOOKING_PROXY: ACTIVE
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== EXP & CERTS ===== -->
+    <section id="experience" class="section">
+      <div class="section-header reveal-elem">
+        <div class="mono-tag">04 // BACKGROUND</div>
+        <h2 class="section-title">Experience &amp; <span class="gradient-text">Education</span></h2>
+      </div>
+
+      <div class="timeline-grid">
+        <!-- Education & Work -->
+        <div class="timeline-col">
+          <!-- Work Experience -->
+          <h3 class="side-title">Experience</h3>
+          <div class="terminal-timeline reveal-elem" style="margin-bottom: 40px;">
+            <div class="tt-item">
+              <div class="tt-date">[2024.06 - 2024.08]</div>
+              <div class="tt-title">Summer Training</div>
+              <div class="tt-desc">Full-Stack Development</div>
+              <div class="tech-stack mt-2">
+                <span class="tech-badge">React.js</span>
+                <span class="tech-badge">Node.js</span>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="side-title">Education</h3>
+          <div class="terminal-timeline reveal-elem">
+            <div class="tt-item">
+              <div class="tt-date">[2023.08 - 2027.07]</div>
+              <div class="tt-title">Lovely Professional University</div>
+              <div class="tt-desc">B.Tech – Computer Science & Engineering</div>
+              <div class="tt-status">CGPA: <span style="color:var(--accent-primary)">7.3</span> | STATUS: <span style="color:var(--accent-primary)">IN_PROGRESS</span></div>
+            </div>
+            
+            <div class="tt-item">
+              <div class="tt-date">[2022 - 2023]</div>
+              <div class="tt-title">Saraswati H.S. School</div>
+              <div class="tt-desc">Intermediate</div>
+              <div class="tt-status">SCORE: <span style="color:var(--accent-primary)">87%</span> | STATUS: <span style="color:var(--accent-primary)">COMPLETED</span></div>
+            </div>
+            
+            <div class="tt-item">
+              <div class="tt-date">[2020 - 2021]</div>
+              <div class="tt-title">Saraswati H.S. School</div>
+              <div class="tt-desc">High School (10th)</div>
+              <div class="tt-status">SCORE: <span style="color:var(--accent-primary)">88%</span> | STATUS: <span style="color:var(--accent-primary)">COMPLETED</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificates & Achievements -->
+        <div class="timeline-col">
+          <h3 class="side-title">Certifications &amp; Awards</h3>
+          
+          <div class="cert-grid">
+            <a href="cipher-updated.pdf" target="_blank" class="cert-card bento-card bento-hover reveal-elem" style="text-decoration: none;">
+              <div class="cert-img-container">
+                <div class="visual-overlay grid-overlay"></div>
+                <img src="cipher-cover.png" alt="Certificate for DSA using Java">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED]</div>
+                <h5>DSA using Java</h5>
+                <span class="text-dim text-xs mono">Cipher Schools · Jul 2025</span>
+              </div>
+            </a>
+
+            <a href="Cloud Computing-NPTEL.pdf" target="_blank" class="cert-card bento-card bento-hover reveal-elem delay-1" style="text-decoration: none;">
+              <div class="cert-img-container">
+                <div class="visual-overlay noise-overlay"></div>
+                <img src="nptel-cover.png" alt="Certificate for Cloud Computing">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED]</div>
+                <h5>Cloud Computing</h5>
+                <span class="text-dim text-xs mono">NPTEL IITKGP · Apr 2025</span>
+              </div>
+            </a>
+
+            <a href="freecodecamp.jpeg" target="_blank" class="cert-card bento-card bento-hover reveal-elem" style="text-decoration: none;">
+              <div class="cert-img-container">
+                <div class="visual-overlay hex-overlay"></div>
+                <img src="freecodecamp.jpeg" alt="Responsive Web Design">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED]</div>
+                <h5>Responsive Web Design</h5>
+                <span class="text-dim text-xs mono">FreeCodeCamp · Nov 2023</span>
+              </div>
+            </a>
+
+
+
+            <!-- New Certificates -->
+            <a href="Coursera INTRODUCTION TO HARDWARE.pdf" target="_blank" class="cert-card bento-card bento-hover reveal-elem" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; overflow: hidden; background: rgba(0,0,0,0.5);">
+                <embed src="Coursera INTRODUCTION TO HARDWARE.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" type="application/pdf" style="width: 100%; height: 100%; pointer-events: none; position: absolute; inset: 0; z-index: 1;">
+                <div class="visual-overlay noise-overlay" style="z-index: 2; pointer-events: none;"></div>
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED]</div>
+                <h5>Intro to Hardware</h5>
+                <span class="text-dim text-xs mono">Coursera</span>
+              </div>
+            </a>
+
+            <a href="Coursera Bits and Bytes certificate.pdf" target="_blank" class="cert-card bento-card bento-hover reveal-elem delay-1" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; overflow: hidden; background: rgba(0,0,0,0.5);">
+                <embed src="Coursera Bits and Bytes certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" type="application/pdf" style="width: 100%; height: 100%; pointer-events: none; position: absolute; inset: 0; z-index: 1;">
+                <div class="visual-overlay grid-overlay" style="z-index: 2; pointer-events: none;"></div>
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED]</div>
+                <h5>Bits & Bytes of Networking</h5>
+                <span class="text-dim text-xs mono">Coursera</span>
+              </div>
+            </a>
+
+            <a href="himanshu-gupta-76df2ffd-b4da-490f-af12-3c3e61c04d2d-certificate.pdf" target="_blank" class="cert-card bento-card bento-hover reveal-elem delay-2" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; overflow: hidden; background: rgba(0,0,0,0.5);">
+                <embed src="himanshu-gupta-76df2ffd-b4da-490f-af12-3c3e61c04d2d-certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" type="application/pdf" style="width: 100%; height: 100%; pointer-events: none; position: absolute; inset: 0; z-index: 1;">
+                <div class="visual-overlay hex-overlay" style="z-index: 2; pointer-events: none;"></div>
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED]</div>
+                <h5>Professional Certification</h5>
+                <span class="text-dim text-xs mono">Verified Credential</span>
+              </div>
+            </a>
+
+            <!-- Code-A-Thon -->
+            <a href="image copy 2.png" target="_blank" class="cert-card bento-card bento-hover reveal-elem delay-3" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; background: rgba(0,0,0,0.4);">
+                <div class="visual-overlay grid-overlay" style="z-index: 2; pointer-events: none; opacity: 0.5;"></div>
+                <img src="image copy 2.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[PARTICIPATION]</div>
+                <h5>Code-A-Thon Certificate</h5>
+                <span class="text-dim text-xs mono">LPU · Hackathon</span>
+              </div>
+            </a>
+
+            <!-- Symposium 1 -->
+            <a href="synposium.png" target="_blank" class="cert-card bento-card bento-hover reveal-elem" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; background: rgba(0,0,0,0.4);">
+                <div class="visual-overlay noise-overlay" style="z-index: 2; pointer-events: none; opacity: 0.5;"></div>
+                <img src="synposium.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[PARTICIPATION]</div>
+                <h5>Symposium Certificate</h5>
+                <span class="text-dim text-xs mono">Event Participated</span>
+              </div>
+            </a>
+
+            <!-- Symposium 2 -->
+            <a href="symposium2.png" target="_blank" class="cert-card bento-card bento-hover reveal-elem delay-1" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; background: rgba(0,0,0,0.4);">
+                <div class="visual-overlay scanline" style="z-index: 2; pointer-events: none; opacity: 0.5;"></div>
+                <img src="symposium2.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[PARTICIPATION]</div>
+                <h5>Symposium Certification</h5>
+                <span class="text-dim text-xs mono">Event Participated</span>
+              </div>
+            </a>
+
+            <!-- HackerRank Frontend -->
+            <a href="hackerrank.png" target="_blank" class="cert-card bento-card bento-hover reveal-elem delay-2" style="text-decoration: none;">
+              <div class="cert-img-container" style="position: relative; background: rgba(0,0,0,0.4);">
+                <div class="visual-overlay hex-overlay" style="z-index: 2; pointer-events: none; opacity: 0.5;"></div>
+                <img src="hackerrank.png" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+              </div>
+              <div class="cert-text p-4">
+                <div class="mono text-xs text-dim mb-1" style="color:var(--accent-primary);">[VERIFIED ROLE]</div>
+                <h5>Frontend Developer (React)</h5>
+                <span class="text-dim text-xs mono">HackerRank Verified</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== IMPACT & CONTRIBUTIONS ===== -->
+    <section id="impact" class="section" style="min-height: auto; padding-bottom: 60px;">
+      <div class="section-header reveal-elem">
+        <div class="mono-tag">03.5 // INITIATIVES</div>
+        <h2 class="section-title">Impact &amp; <span class="gradient-text">Contributions</span></h2>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Open Source -->
+        <div class="bento-card reveal-elem bento-hover sys-module-card p-0" style="padding: 0;">
+          <div class="module-header mono text-xs" style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px;">
+            <span class="pulse-dot" style="width: 6px; height: 6px; background: var(--accent-primary);"></span> OPEN SOURCE
+          </div>
+          <div class="bento-content" style="padding: 24px;">
+            <div class="bento-icon" style="color: var(--accent-primary);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></div>
+            <h3 class="mono text-sm mb-2">Open Source</h3>
+            <p class="text-dim text-xs" style="line-height:1.6;">Active contributor to various open source repositories, focusing on UI components, backend toolings, and documentation improvements.</p>
+          </div>
+        </div>
+
+        <!-- Research Publication/Patent -->
+        <div class="bento-card reveal-elem bento-hover sys-module-card p-0 delay-1" style="padding: 0;">
+          <div class="module-header mono text-xs" style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px;">
+            <span class="pulse-dot" style="width: 6px; height: 6px; background: var(--accent-primary); box-shadow: 0 0 8px var(--accent-primary);"></span> RESEARCH & PUBS
+          </div>
+          <div class="bento-content" style="padding: 24px;">
+            <div class="bento-icon" style="color: var(--accent-primary);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+            <h3 class="mono text-sm mb-2">Research &amp; Publications</h3>
+            <p class="text-dim text-xs" style="line-height:1.6;">Engaged in academic research related to Web Technologies and AI. Published papers on performance optimization and scalable architectures.</p>
+          </div>
+        </div>
+
+        <!-- NGO Volunteering -->
+        <div class="bento-card reveal-elem bento-hover sys-module-card p-0 delay-2" style="padding: 0;">
+          <div class="module-header mono text-xs" style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px;">
+            <span class="pulse-dot" style="width: 6px; height: 6px; background: var(--accent-primary); box-shadow: 0 0 8px var(--accent-primary);"></span> COMMUNITY_SERVICE
+          </div>
+          <div class="bento-content" style="padding: 24px;">
+            <div class="bento-icon" style="color: var(--accent-primary);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+            <h3 class="mono text-sm mb-2">NGO Experience</h3>
+            <p class="text-dim text-xs" style="line-height:1.6;">Actively collaborated with Non-Governmental Organizations on community initiatives, demonstrating proactive leadership and vital social responsibility.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section" style="padding-bottom: 40px; min-height: auto;">
+      <div class="section-header reveal-elem" style="margin-bottom: 40px;">
+        <div class="mono-tag">05 // COMMS</div>
+        <h2 class="section-title">Get in <span class="gradient-text">Touch</span></h2>
+      </div>
+      <div class="contact-grid reveal-elem">
+        <!-- Left Column: Contact Info -->
+        <div class="contact-info-col">
+          <h3 class="side-title" style="border-bottom:none; box-shadow:none; text-transform:uppercase;">CONTACT INFORMATION</h3>
+          
+          <div class="contact-card bento-card bento-hover">
+            <div class="contact-icon icon-red">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div class="contact-details">
+              <span class="contact-label">EMAIL</span>
+              <a href="mailto:hg333077@gmail.com" class="contact-value">hg333077@gmail.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-card bento-card bento-hover mt-4">
+            <div class="contact-icon icon-green">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <div class="contact-details">
+              <span class="contact-label">PHONE</span>
+              <a href="tel:+917747906289" class="contact-value">+91 7747906289</a>
+            </div>
+          </div>
+
+          <div class="contact-card bento-card bento-hover mt-4">
+            <div class="contact-icon icon-gray">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </div>
+            <div class="contact-details">
+              <span class="contact-label">GITHUB</span>
+              <a href="https://github.com/himansh077" target="_blank" class="contact-value">github.com/himansh077</a>
+            </div>
+          </div>
+
+          <div class="contact-card bento-card bento-hover mt-4">
+            <div class="contact-icon icon-blue">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </div>
+            <div class="contact-details">
+              <span class="contact-label">LINKEDIN</span>
+              <a href="https://www.linkedin.com/in/himanshh07/" target="_blank" class="contact-value">linkedin.com/in/himanshh07</a>
+            </div>
+          </div>
+
+          <div class="contact-quote bento-card bento-hover mt-4">
+            <p>"I'm always open to discussing new opportunities, interesting projects, or potential collaborations. Let's make something incredible together."</p>
+            <span class="quote-author">— Himanshu Gupta</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Form -->
+        <div class="contact-form-col bento-card bento-hover">
+          <h3 class="side-title" style="margin-bottom: 30px; border-bottom: none; box-shadow:none; font-family:var(--font-heading); display:flex; align-items:center; letter-spacing:0; text-transform:uppercase;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2" width="24" height="24" style="margin-right: 12px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> SEND A MESSAGE
+          </h3>
+          <form class="contact-form" action="mailto:hg333077@gmail.com" method="POST" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or just say hello..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom" style="margin-top: 50px; justify-content: space-between; display: flex; align-items: center; width: 100%; border-top: none; padding-top: 0; padding-bottom: 20px;">
+        <span class="mono text-xs text-dim">© 2026 Himanshu Gupta.</span>
+        <span class="mono text-xs text-dim status-dot">ALL_SYSTEMS_OPERATIONAL</span>
+      </div>
+    </section>
+  </main>
+  </div> <!-- END CONTENT WRAPPER -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js?v=3.1.0"></script>
+</body>
+</html>
